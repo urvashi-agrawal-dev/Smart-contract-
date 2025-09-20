@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.19;
 
 contract GitCareBounty {
@@ -11,7 +11,7 @@ contract GitCareBounty {
         bool isCompleted;
         address completedBy;
         uint256 createdAt;
-        string[] tags; // Store tags for filtering
+        string[] tags; 
     }
     
     struct UserStats {
@@ -58,7 +58,7 @@ contract GitCareBounty {
     function createBounty(
         string memory _title, 
         string memory _description, 
-        string[] memory _tags // Now using this parameter
+        string[] memory _tags 
     ) external payable {
         require(msg.value > 0, "Reward must be greater than 0");
         require(bytes(_title).length > 0, "Title cannot be empty");
@@ -76,7 +76,7 @@ contract GitCareBounty {
             isCompleted: false,
             completedBy: address(0),
             createdAt: block.timestamp,
-            tags: _tags // Now using the tags parameter
+            tags: _tags 
         });
         
         userBounties[msg.sender].push(bountyCount);
@@ -90,10 +90,8 @@ contract GitCareBounty {
         bounty.isCompleted = true;
         bounty.completedBy = msg.sender;
         
-        // Transfer the reward
         payable(msg.sender).transfer(bounty.reward);
         
-        // Update user stats
         userStats[msg.sender].completedBounties++;
         userStats[msg.sender].totalEarned += bounty.reward;
         userStats[msg.sender].reputation += calculateReputationPoints(bounty.reward);
@@ -147,7 +145,7 @@ contract GitCareBounty {
     }
     
     function calculateReputationPoints(uint256 _reward) private pure returns (uint256) {
-        // Reputation points based on reward amount
+        
         if (_reward < 0.1 ether) return 1;
         if (_reward < 0.5 ether) return 5;
         if (_reward < 1 ether) return 10;
@@ -164,15 +162,12 @@ contract GitCareBounty {
     
     function getBountiesByTag(string memory _tag) public view returns (uint256[] memory) {
         uint256 count = 0;
-        
-        // First pass: count matching bounties
         for (uint256 i = 1; i <= bountyCount; i++) {
             if (hasTag(i, _tag)) {
                 count++;
             }
         }
         
-        // Second pass: collect matching bounty IDs
         uint256[] memory result = new uint256[](count);
         uint256 index = 0;
         
@@ -196,11 +191,8 @@ contract GitCareBounty {
         return false;
     }
     
-    // Emergency function to withdraw funds (only owner)
     function withdrawFunds() external onlyOwner {
         payable(owner).transfer(address(this).balance);
     }
-    
-    // Fallback function to receive ETH
     receive() external payable {}
 }
