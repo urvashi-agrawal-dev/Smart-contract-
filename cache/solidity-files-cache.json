@@ -1,0 +1,40 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/home/megatron/Documents/smar/avalanche-bounty-contract/contracts/GitCareBounty.sol": {
+      "lastModificationDate": 1758388017490,
+      "contentHash": "7bee066b69403bc04291d7a9b79c735d",
+      "sourceName": "contracts/GitCareBounty.sol",
+      "solcConfig": {
+        "version": "0.8.19",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.19"
+      ],
+      "artifacts": [
+        "GitCareBounty"
+      ]
+    }
+  }
+}
